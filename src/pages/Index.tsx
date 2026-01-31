@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import MoodSpinner from "@/components/MoodSpinner";
+import LiveNow from "@/components/LiveNow";
+import ObserveSection from "@/components/ObserveSection";
+import LearnSection from "@/components/LearnSection";
+import DiscussSection from "@/components/DiscussSection";
+import SupportSection from "@/components/SupportSection";
+import PauseSection from "@/components/PauseSection";
+import InTheAirSection from "@/components/InTheAirSection";
+import CategoriesSection from "@/components/CategoriesSection";
+import OnlineSpaceSection from "@/components/OnlineSpaceSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <Hero />
+      <MoodSpinner />
+      <LiveNow />
+      <ObserveSection />
+      <LearnSection />
+      <DiscussSection />
+      <SupportSection />
+      <PauseSection />
+      <InTheAirSection />
+      <CategoriesSection />
+      <OnlineSpaceSection />
+      <Footer />
     </div>
   );
 };
