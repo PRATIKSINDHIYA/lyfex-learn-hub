@@ -6,43 +6,43 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
+    --background: 230 69% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 14%;
+    --card: 230 60% 15%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 14%;
+    --popover: 230 60% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 24 95% 53%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 30 100% 55%;
+    --primary-foreground: 230 69% 11%;
 
-    --secondary: 217 33% 17%;
+    --secondary: 230 50% 18%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
+    --muted: 230 50% 18%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 42 100% 60%;
+    --accent-foreground: 230 69% 11%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 25%;
-    --input: 217 33% 25%;
-    --ring: 24 95% 53%;
+    --border: 230 40% 25%;
+    --input: 230 40% 25%;
+    --ring: 30 100% 55%;
 
     --radius: 0.75rem;
 
-    /* Custom Lyfex colors */
-    --navy: 222 47% 11%;
-    --navy-light: 222 47% 14%;
-    --navy-lighter: 222 40% 20%;
-    --orange: 24 95% 53%;
-    --gold: 38 92% 50%;
-    --orange-glow: 24 100% 60%;
+    /* Custom Lyfex colors - #0A0F2D base */
+    --navy: 230 69% 11%;
+    --navy-light: 230 60% 15%;
+    --navy-lighter: 230 50% 22%;
+    --orange: 30 100% 55%;
+    --gold: 42 100% 60%;
+    --orange-glow: 30 100% 65%;
 
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 210 40% 98%;
@@ -55,33 +55,33 @@
   }
 
   .dark {
-    --background: 222 47% 11%;
+    --background: 230 69% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 14%;
+    --card: 230 60% 15%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 14%;
+    --popover: 230 60% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 24 95% 53%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 30 100% 55%;
+    --primary-foreground: 230 69% 11%;
 
-    --secondary: 217 33% 17%;
+    --secondary: 230 50% 18%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
+    --muted: 230 50% 18%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 42 100% 60%;
+    --accent-foreground: 230 69% 11%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 25%;
-    --input: 217 33% 25%;
-    --ring: 24 95% 53%;
+    --border: 230 40% 25%;
+    --input: 230 40% 25%;
+    --ring: 30 100% 55%;
   }
 }
 
@@ -119,6 +119,18 @@
 
   .text-shadow-glow {
     text-shadow: 0 0 20px hsl(var(--orange) / 0.5);
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+  }
+
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+
+  .text-orange {
+    color: hsl(var(--orange));
   }
 }
 
