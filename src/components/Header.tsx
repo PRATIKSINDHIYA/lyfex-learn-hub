@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -9,12 +10,12 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-lg gradient-orange flex items-center justify-center">
             <span className="text-primary-foreground font-bold text-xl">L</span>
           </div>
           <span className="text-2xl font-bold text-foreground">Lyfex</span>
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
@@ -31,11 +32,11 @@ const Header = () => {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            Register
+          <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+            <Link to="/register">Register</Link>
           </Button>
-          <Button className="gradient-orange text-primary-foreground hover:opacity-90">
-            Login
+          <Button asChild className="gradient-orange text-primary-foreground hover:opacity-90">
+            <Link to="/login">Login</Link>
           </Button>
         </div>
 
@@ -63,11 +64,11 @@ const Header = () => {
             </a>
           </nav>
           <div className="flex flex-col gap-3">
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground w-full">
-              Register
+            <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground w-full">
+              <Link to="/register">Register</Link>
             </Button>
-            <Button className="gradient-orange text-primary-foreground hover:opacity-90 w-full">
-              Login
+            <Button asChild className="gradient-orange text-primary-foreground hover:opacity-90 w-full">
+              <Link to="/login">Login</Link>
             </Button>
           </div>
         </div>
