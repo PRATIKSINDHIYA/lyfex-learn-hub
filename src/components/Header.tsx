@@ -31,10 +31,10 @@ const Header = () => {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+          <Button className="gradient-orange text-primary-foreground hover:opacity-90 rounded-full px-6">
             Register
           </Button>
-          <Button className="gradient-orange text-primary-foreground hover:opacity-90">
+          <Button className="gradient-orange text-primary-foreground hover:opacity-90 rounded-full px-6">
             Login
           </Button>
         </div>
@@ -63,10 +63,10 @@ const Header = () => {
             </a>
           </nav>
           <div className="flex flex-col gap-3">
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground w-full">
+            <Button className="gradient-orange text-primary-foreground hover:opacity-90 w-full rounded-full">
               Register
             </Button>
-            <Button className="gradient-orange text-primary-foreground hover:opacity-90 w-full">
+            <Button className="gradient-orange text-primary-foreground hover:opacity-90 w-full rounded-full">
               Login
             </Button>
           </div>
