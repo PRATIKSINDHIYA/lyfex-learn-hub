@@ -91,7 +91,7 @@ export default function MoodSpinner() {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#050B2E] to-[#0A0F2D]">
+    <section className="bg-gradient-to-b from-[#050B2E] to-[#0A0F2D]">
       <div className="container mx-auto px-6">
 
         <div className="flex flex-col lg:flex-row items-start justify-center gap-20">
