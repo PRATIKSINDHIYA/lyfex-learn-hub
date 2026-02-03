@@ -1,98 +1,120 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Calendar, Clock } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const discussItems = [
   {
-    title: "Is AI replacing designers?",
-    instructor: "Panel Discussion",
-    date: "Jan 15",
-    time: "6:00 PM",
-    category: "Technology",
+    title: "Will AI-Powered Robots Replace Human Jobs?",
+    speaker: "Dr. James Martinez",
+    category: "Robotics",
+    date: "Today",
+    time: "6 PM",
   },
   {
-    title: "Work-life balance in tech",
-    instructor: "Sarah & Team",
-    date: "Jan 18",
-    time: "7:30 PM",
-    category: "Career",
+    title: "Is AI-Generated Art the Future of Creativity?",
+    speaker: "Emma Thompson",
+    category: "Robotics",
+    date: "Today",
+    time: "6 PM",
   },
   {
-    title: "Future of remote work",
-    instructor: "Industry Experts",
-    date: "Jan 20",
-    time: "5:00 PM",
-    category: "Business",
-  },
-  {
-    title: "Mental health awareness",
-    instructor: "Dr. Emily Chen",
-    date: "Jan 22",
-    time: "4:00 PM",
-    category: "Wellness",
+    title: "Why Communication Skills Matter More Than Technical Skills",
+    speaker: "Sarah Chen",
+    category: "Robotics",
+    date: "Today",
+    time: "6 PM",
   },
 ];
 
-const DiscussSection = () => {
+export default function DiscussSection() {
   return (
-    <section className="py-20 relative">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center gap-3 mb-2">
-          <Badge className="gradient-orange text-primary-foreground border-none">
-            📍 DISCUSS
-          </Badge>
-        </div>
-        
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-          Talk, ask & <span className="gradient-orange-text">share freely</span>
-        </h2>
-        <p className="text-muted-foreground mb-8">Join conversations that matter</p>
+    <section className="py-12 sm:py-20 bg-navy overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative">
 
-        <Carousel opts={{ align: "start", loop: true }} className="w-full">
-          <CarouselContent className="-ml-4">
-            {discussItems.map((item, index) => (
-              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <div className="relative p-[2px] rounded-full group cursor-pointer">
-                  <div className="absolute inset-0 rounded-full gradient-orange opacity-50 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative bg-card rounded-full p-6 h-80 flex flex-col justify-between">
-                    <div>
-                      <Badge variant="outline" className="border-primary/50 text-primary mb-4">
-                        {item.category}
-                      </Badge>
-                      <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm">{item.instructor}</p>
-                    </div>
-                    
-                    <div>
-                      <div className="flex items-center gap-4 mb-4 text-sm">
-                        <div className="flex items-center gap-1 text-muted-foreground">
-                          <Calendar size={14} className="text-primary" />
-                          <span>{item.date}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-muted-foreground">
-                          <Clock size={14} className="text-primary" />
-                          <span>{item.time}</span>
-                        </div>
+        {/* HEADER */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-16 gap-6">
+          <div>
+            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#2A1E14] border border-orange/30 text-orange font-semibold text-sm">
+              📍 DISCUSS 💬
+            </span>
+
+            <p className="text-foreground/80 mt-4 text-lg">
+              Talk, ask & share freely
+            </p>
+          </div>
+
+          <button className="btn-primary self-start hidden sm:inline-flex">
+            View all
+          </button>
+        </div>
+
+        {/* SLIDER */}
+        <Carousel opts={{ align: "start", loop: true }}>
+          <CarouselContent className="gap-6 sm:gap-8">
+            {discussItems.map((item, i) => (
+              <CarouselItem
+                key={i}
+                className="basis-full sm:basis-1/2 lg:basis-1/3 flex justify-center"
+              >
+                {/* RESPONSIVE WRAPPER */}
+                <div className="w-full max-w-[360px] flex justify-center">
+
+                  {/* OUTER CIRCLE (PERFECT) */}
+                  <div className="relative w-full max-w-[340px] aspect-square rounded-[600px_600px_1260px_600px] border-[3px] sm:border-[5px] bg-[conic-gradient(from_90deg,_#fb923c_0deg_180deg,_#ec4899_180deg_360deg)]
+ flex items-center justify-center card card-hover">
+
+                    {/* INNER CARD */}
+                    <div className="w-[85%] aspect-square rounded-full bg-card p-4 sm:p-6 flex flex-col justify-between">
+
+                      {/* CATEGORY */}
+                      <div className="flex justify-center">
+                        <span className="px-3 py-1 rounded-full bg-pink-500 text-white text-xs sm:text-sm font-medium">
+                          {item.category}
+                        </span>
                       </div>
-                      
-                      <Button variant="ghost" className="text-primary hover:text-primary hover:bg-primary/10 p-0">
-                        Join Discussion <ArrowRight size={16} className="ml-2" />
-                      </Button>
+
+                      {/* CONTENT */}
+                      <div className="text-center">
+                        <h3 className="text-foreground text-base sm:text-lg font-semibold leading-snug">
+                          {item.title}
+                        </h3>
+                        <p className="text-muted-foreground mt-2 text-xs sm:text-sm">
+                          with {item.speaker}
+                        </p>
+                      </div>
+
+                      {/* META */}
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+                        <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange text-black text-xs sm:text-sm">
+                          <Calendar size={12} /> {item.date}
+                        </span>
+                        <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-orange text-black text-xs sm:text-sm">
+                          <Clock size={12} /> {item.time}
+                        </span>
+                      </div>
+
+                      {/* CTA */}
+                      <button className="w-full mt-2 px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-pink-500 text-white font-medium text-sm hover:opacity-90 transition">
+                        Join Discussion →
+                      </button>
+
                     </div>
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-4 bg-primary text-primary-foreground hover:bg-primary/90" />
-          <CarouselNext className="hidden md:flex -right-4 bg-primary text-primary-foreground hover:bg-primary/90" />
+
+          {/* ARROWS */}
+          <CarouselPrevious className="-left-6 sm:-left-10 bg-orange text-black hover:opacity-90" />
+          <CarouselNext className="-right-6 sm:-right-10 bg-orange text-black hover:opacity-90" />
         </Carousel>
       </div>
     </section>
   );
-};
-
-export default DiscussSection;
+}

@@ -54,6 +54,12 @@
     --sidebar-ring: 24 95% 53%;
   }
 
+  html {
+    font-size: clamp(14px, 1.3vw, 16px);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   .dark {
     --background: 230 69% 11%;
     --foreground: 210 40% 98%;

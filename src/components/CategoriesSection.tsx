@@ -1,45 +1,70 @@
-import { Code, Palette, Briefcase, TrendingUp, Users, Star, Music, Sparkles, Cpu } from "lucide-react";
-
-const categories = [
-  { name: "Development", icon: Code, trending: true },
-  { name: "Design", icon: Palette, trending: false },
-  { name: "Business", icon: Briefcase, trending: false },
-  { name: "Marketing", icon: TrendingUp, trending: true },
-  { name: "Leadership", icon: Users, trending: false },
-  { name: "Featured", icon: Star, trending: false },
-  { name: "Music & Art", icon: Music, trending: true },
-  { name: "Trending", icon: Sparkles, trending: true },
-  { name: "Technology", icon: Cpu, trending: false },
-];
+import { Lightbulb } from "lucide-react";
 
 const CategoriesSection = () => {
-  return (
-    <section className="py-20 relative">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 text-center">
-          What's on your <span className="gradient-orange-text">Mind</span>?
-        </h2>
-        <p className="text-muted-foreground text-center mb-12">Explore skills across diverse categories</p>
+  const categories = [
+    { name: "Development", active: true },
+    { name: "Design", active: true },
+    { name: "Communication", active: true },
+    { name: "Business", active: true },
+    { name: "Marketing", active: true },
+    { name: "Leadership", active: false },
+    { name: "Featured", active: false },
+    { name: "Music & Arts", active: true },
+    { name: "Trending", active: false },
+    { name: "Technology", active: true },
+  ];
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-5xl mx-auto">
-          {categories.map((category, index) => (
-            <div
-              key={index}
-              className="card-glass rounded-xl p-6 flex flex-col items-center gap-3 hover:border-primary/50 transition-all duration-300 group cursor-pointer relative"
-            >
-              {category.trending && (
-                <div className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full animate-pulse" />
-              )}
-              
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <category.icon className="text-primary" size={24} />
+  // Create a 3x6 grid with some empty cells
+  const grid = [
+    [null, "Development", null, "Design", null, "Communication"],
+    ["Business", null, "Marketing", null, "Leadership", "Featured"],
+    [null, "Music & Arts", null, null, "Trending", "Technology"],
+  ];
+
+  return (
+    <section className="py-16">
+      <div className="container">
+        {/* Section Header */}
+
+         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-16 gap-6">
+          <div>
+            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#2A1E14] border border-orange/30 text-orange font-semibold text-sm">
+              📍 Categories
+            </span>
+
+            <p className="text-foreground/80 mt-4 text-lg">
+            Explore skills across diverse categories
+            </p>
+          </div>
+
+          <button className="btn-primary self-start hidden sm:inline-flex">
+            View all
+          </button>
+        </div>
+
+
+        {/* Categories Grid */}
+        <div className="rounded-3xl border border-border/30 bg-card/50 p-6 md:p-8">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
+            {grid.flat().map((category, index) => (
+              <div
+                key={index}
+                className={`aspect-square flex items-center justify-center rounded-xl border transition-all cursor-pointer ${
+                  category
+                    ? "border-primary/50 bg-gradient-to-br from-primary/20 to-primary/5 hover:border-primary hover:shadow-md"
+                    : "border-border/30 bg-secondary/30"
+                }`}
+              >
+                {category ? (
+                  <span className="text-xs md:text-sm font-medium text-foreground text-center px-2">
+                    {category}
+                  </span>
+                ) : (
+                  <Lightbulb className="h-5 w-5 md:h-6 md:w-6 text-muted-foreground/50" />
+                )}
               </div>
-              
-              <span className="text-foreground font-medium text-center group-hover:text-primary transition-colors">
-                {category.name}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

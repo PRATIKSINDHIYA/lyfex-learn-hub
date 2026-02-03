@@ -1,61 +1,84 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+import avatar1 from "@/assets/avatar-1.jpg";
+import avatar2 from "@/assets/avatar-2.jpg";
+import avatar3 from "@/assets/avatar-3.jpg";
+import avatar4 from "@/assets/avatar-4.jpg";
+import avatar5 from "@/assets/avatar-5.jpg";
 
 const avatars = [
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&fit=crop&crop=face",
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
 ];
 
-const OnlineSpaceSection = () => {
-  return (
-    <section className="py-20 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-          In the <span className="gradient-orange-text">Online Space</span>
-        </h2>
+export default function OnlineSpaceSection() {
+  const autoplay = useRef(
+    Autoplay({
+      delay: 2500,        // speed (ms)
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  );
 
-        <Carousel opts={{ align: "center", loop: true }} className="w-full max-w-4xl mx-auto">
-          <CarouselContent className="-ml-4">
-            {avatars.map((avatar, index) => (
-              <CarouselItem key={index} className="pl-4 basis-1/3 md:basis-1/4 lg:basis-1/5">
-                <div 
-                  className="relative group"
-                  style={{
-                    transform: `perspective(1000px) rotateY(${(index - 3) * 10}deg)`,
-                  }}
+  return (
+    <section className="py-12 sm:py-20 bg-navy overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative">
+
+        {/* HEADER */}
+        <div className="flex items-center justify-between mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+            In the <span className="text-orange">Online Space</span>
+          </h2>
+
+          <button className="px-5 py-2 sm:px-7 sm:py-2.5 rounded-full bg-orange text-black font-medium hover:opacity-90 transition">
+            View all
+          </button>
+        </div>
+
+        {/* SLIDER */}
+        <Carousel
+          opts={{ align: "center", loop: true }}
+          plugins={[autoplay.current]}
+          onMouseEnter={autoplay.current.stop}
+          onMouseLeave={autoplay.current.reset}
+        >
+          <CarouselContent className="gap-14">
+
+            {avatars.map((src, i) => (
+              <CarouselItem key={i} className="basis-1/3 sm:basis-[260px] flex justify-center">
+                <div
+                  className={`relative w-56 sm:w-60 md:w-64 h-72 sm:h-80 rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.55)] transition-all duration-500 ${
+                    i % 2 === 0 ? "sm:-rotate-6" : "sm:rotate-6"
+                  } rotate-0`}
                 >
-                  <div className="p-[3px] rounded-full gradient-orange opacity-50 group-hover:opacity-100 transition-opacity">
-                    <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-background">
-                      <img
-                        src={avatar}
-                        alt={`User ${index + 1}`}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
+                  <img src={src} alt="avatar" className="w-full h-full object-cover" />
+
+                  {/* GOLD EDGE */}
+                  <div className="absolute inset-0 ring-1 ring-orange/40 rounded-xl" />
                 </div>
               </CarouselItem>
             ))}
+
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-12 bg-primary text-primary-foreground hover:bg-primary/90" />
-          <CarouselNext className="hidden md:flex -right-12 bg-primary text-primary-foreground hover:bg-primary/90" />
+
+          {/* ARROWS */}
+          <CarouselPrevious className="left-6 bg-orange-500 text-black hover:bg-orange-400" />
+          <CarouselNext className="right-6 bg-orange-500 text-black hover:bg-orange-400" />
         </Carousel>
 
-        <p className="text-center text-muted-foreground mt-8">
-          Join <span className="text-primary font-semibold">2,547</span> learners online right now
-        </p>
       </div>
     </section>
   );
-};
-
-export default OnlineSpaceSection;
+}

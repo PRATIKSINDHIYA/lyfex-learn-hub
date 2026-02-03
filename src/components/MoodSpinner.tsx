@@ -1,51 +1,71 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const segments = [
-  { label: "Observe", color: "hsl(24, 95%, 53%)", description: "Watch and learn from real journeys" },
-  { label: "Learn", color: "hsl(38, 92%, 50%)", description: "Casual learning, one sip at a time" },
-  { label: "Discuss", color: "hsl(30, 90%, 52%)", description: "Talk, ask & share freely" },
-  { label: "Support", color: "hsl(20, 95%, 50%)", description: "Get help, give help" },
-  { label: "Pause", color: "hsl(35, 88%, 48%)", description: "Refresh, relax, and reset" },
+  {
+    label: "Observe",
+    color: "#F4C7A1",
+    description: "Watch real people work, decide, struggle, and grow",
+    path: "/observe",
+  },
+  {
+    label: "Learn",
+    color: "#E39A14",
+    description: "Casual learning, one sip at a time",
+    path: "/learn",
+  },
+  {
+    label: "Discuss",
+    color: "#E67E3A",
+    description: "Talk it out. Question everything.",
+    path: "/discuss",
+  },
+  {
+    label: "Support",
+    color: "#FF9A3C",
+    description: "Sometimes you need help. Sometimes you are the help.",
+    path: "/support",
+  },
+  {
+    label: "Pause",
+    color: "#E3B012",
+    description: "Just breathe. Reset before the next move.",
+    path: "/pause",
+  },
 ];
 
-const MoodSpinner = () => {
+export default function MoodSpinner() {
   const [isSpinning, setIsSpinning] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [rotation, setRotation] = useState(0);
-  const wheelRef = useRef<SVGSVGElement>(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const navigate = useNavigate();
+  const wheelRef = useRef(null);
 
   const spin = () => {
     if (isSpinning) return;
-    
+
     setIsSpinning(true);
-    const spins = 5 + Math.random() * 3; // 5-8 full rotations
+
     const segmentAngle = 360 / segments.length;
-    const randomSegment = Math.floor(Math.random() * segments.length);
-    const finalRotation = spins * 360 + (randomSegment * segmentAngle) + (segmentAngle / 2);
-    
-    setRotation(rotation + finalRotation);
-    
+    const randomIndex = Math.floor(Math.random() * segments.length);
+    const spins = 6;
+
+    const finalRotation =
+      spins * 360 +
+      (segments.length - randomIndex) * segmentAngle -
+      segmentAngle / 2;
+
+    setRotation((prev) => prev + finalRotation);
+
     setTimeout(() => {
       setIsSpinning(false);
-      setSelectedIndex(randomSegment);
+      setSelectedIndex(randomIndex);
+      navigate(segments[randomIndex].path);
     }, 4000);
   };
 
-  const createSegmentPath = (index: number, total: number) => {
-    const angle = 360 / total;
-    const startAngle = index * angle - 90;
-    const endAngle = startAngle + angle;
-    
-    const start = polarToCartesian(150, 150, 140, endAngle);
-    const end = polarToCartesian(150, 150, 140, startAngle);
-    
-    const largeArcFlag = angle > 180 ? 1 : 0;
-    
-    return `M 150 150 L ${start.x} ${start.y} A 140 140 0 ${largeArcFlag} 0 ${end.x} ${end.y} Z`;
-  };
-
-  const polarToCartesian = (cx: number, cy: number, r: number, angle: number) => {
+  const polarToCartesian = (cx, cy, r, angle) => {
     const rad = (angle * Math.PI) / 180;
     return {
       x: cx + r * Math.cos(rad),
@@ -53,107 +73,132 @@ const MoodSpinner = () => {
     };
   };
 
-  const getLabelPosition = (index: number, total: number) => {
-    const angle = (360 / total) * index + (360 / total / 2) - 90;
+  const createSegmentPath = (index, total) => {
+    const angle = 360 / total;
+    const startAngle = index * angle - 90;
+    const endAngle = startAngle + angle;
+
+    const start = polarToCartesian(150, 150, 140, endAngle);
+    const end = polarToCartesian(150, 150, 140, startAngle);
+
+    return `M150 150 L${start.x} ${start.y}
+            A140 140 0 0 0 ${end.x} ${end.y} Z`;
+  };
+
+  const getLabelPosition = (index, total) => {
+    const angle = (360 / total) * index + (360 / total) / 2 - 90;
     return polarToCartesian(150, 150, 90, angle);
   };
 
   return (
-    <section className="py-20 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            What's Your <span className="gradient-orange-text">Mood</span>?
-          </h2>
-          <p className="text-muted-foreground text-lg">Spin the wheel and discover your learning path</p>
-        </div>
+    <section className="py-24 bg-gradient-to-b from-[#050B2E] to-[#0A0F2D]">
+      <div className="container mx-auto px-6">
 
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
-          {/* Wheel */}
-          <div className="relative">
-            {/* Arrow Pointer */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 z-10">
-              <div className="w-0 h-0 border-l-[15px] border-r-[15px] border-t-[25px] border-l-transparent border-r-transparent border-t-primary" />
+        <div className="flex flex-col lg:flex-row items-start justify-center gap-20">
+
+          {/* LEFT SIDE (PILL + ARROW + WHEEL) */}
+          <div className="relative flex flex-col items-center">
+
+            {/* YELLOW PILL */}
+            <div className="mb-6 px-8 py-3 rounded-full bg-yellow-400 text-black font-medium shadow-lg">
+              Not sure how you're feeling right now? Relax – let the spin decide
             </div>
 
-            <div className="relative w-[300px] h-[300px] md:w-[350px] md:h-[350px]">
+            {/* ARROW */}
+            <div className="mb-3">
+              <div className="w-0 h-0 border-l-[16px] border-r-[16px] border-t-[24px]
+                border-l-transparent border-r-transparent border-t-white" />
+            </div>
+
+            {/* WHEEL */}
+            <div className="relative w-[320px] h-[320px]">
               <svg
                 ref={wheelRef}
                 viewBox="0 0 300 300"
-                className="w-full h-full drop-shadow-2xl"
+                className="w-full h-full"
                 style={{
                   transform: `rotate(${rotation}deg)`,
-                  transition: isSpinning ? "transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)" : "none",
+                  transition: isSpinning
+                    ? "transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)"
+                    : "none",
                 }}
               >
-                {segments.map((segment, index) => (
-                  <g key={segment.label}>
+                {segments.map((seg, i) => (
+                  <g key={seg.label}>
                     <path
-                      d={createSegmentPath(index, segments.length)}
-                      fill={segment.color}
-                      stroke="hsl(222, 47%, 11%)"
+                      d={createSegmentPath(i, segments.length)}
+                      fill={seg.color}
+                      stroke="#020617"
                       strokeWidth="2"
                     />
                     <text
-                      x={getLabelPosition(index, segments.length).x}
-                      y={getLabelPosition(index, segments.length).y}
+                      x={getLabelPosition(i, segments.length).x}
+                      y={getLabelPosition(i, segments.length).y}
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      fill="hsl(222, 47%, 11%)"
-                      fontSize="14"
+                      fill="#020617"
                       fontWeight="bold"
+                      fontSize="14"
                       style={{
-                        transform: `rotate(${(360 / segments.length) * index + (360 / segments.length / 2)}deg)`,
-                        transformOrigin: `${getLabelPosition(index, segments.length).x}px ${getLabelPosition(index, segments.length).y}px`,
+                        transform: `rotate(${(360 / segments.length) * i +
+                          360 / segments.length / 2}deg)`,
+                        transformOrigin: `${getLabelPosition(i, segments.length).x}px ${getLabelPosition(i, segments.length).y}px`,
                       }}
                     >
-                      {segment.label}
+                      {seg.label}
                     </text>
                   </g>
                 ))}
-                {/* Center Circle */}
-                <circle cx="150" cy="150" r="40" fill="hsl(222, 47%, 14%)" stroke="hsl(24, 95%, 53%)" strokeWidth="3" />
+
+                <circle
+                  cx="150"
+                  cy="150"
+                  r="42"
+                  fill="#7A3A1E"
+                  stroke="#fff"
+                  strokeWidth="3"
+                />
               </svg>
 
-              {/* Spin Button */}
+              {/* SPIN BUTTON */}
               <Button
                 onClick={spin}
                 disabled={isSpinning}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full gradient-orange text-primary-foreground font-bold text-sm hover:opacity-90 disabled:opacity-50"
+                className="absolute top-1/2 left-1/2
+                -translate-x-1/2 -translate-y-1/2
+                w-16 h-16 rounded-full
+                bg-[#7A3A1E] text-white font-bold
+                hover:opacity-90"
               >
-                {isSpinning ? "..." : "SPIN"}
+                {isSpinning ? "..." : "Spin"}
               </Button>
             </div>
           </div>
 
-          {/* Descriptions */}
-          <div className="grid gap-4 max-w-md">
-            {segments.map((segment, index) => (
+          {/* RIGHT SIDE CARDS */}
+          <div className="space-y-6 max-w-xl w-full">
+            <h3 className="text-yellow-400 text-lg font-semibold mb-2">
+              Stop where your mood feels right:
+            </h3>
+
+            {segments.map((seg, i) => (
               <div
-                key={segment.label}
-                className={`p-4 rounded-xl border transition-all duration-300 ${
-                  selectedIndex === index
-                    ? "border-primary bg-primary/10 scale-105"
-                    : "border-border/50 bg-card/50"
-                }`}
+                key={seg.label}
+                className="p-6 rounded-xl"
+                style={{ backgroundColor: seg.color }}
               >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-4 h-4 rounded-full"
-                    style={{ backgroundColor: segment.color }}
-                  />
-                  <span className="font-semibold text-foreground">{segment.label}</span>
-                </div>
-                <p className="text-muted-foreground text-sm mt-2">{segment.description}</p>
+                <h4 className="font-bold text-black text-lg mb-1">
+                  {seg.label}
+                </h4>
+                <p className="text-black/80 text-sm">
+                  {seg.description}
+                </p>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
   );
-};
-
-export default MoodSpinner;
+}

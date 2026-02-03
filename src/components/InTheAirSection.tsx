@@ -1,81 +1,108 @@
-import { Badge } from "@/components/ui/badge";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const inTheAirItems = [
   {
     rank: 1,
-    title: "Future of AI in Education",
-    description: "Exploring how artificial intelligence is reshaping learning",
+    title: "Motion Graphics",
+    description: "Create stunning animations",
     category: "Discussion",
     isLive: true,
   },
   {
     rank: 2,
-    title: "Remote Work Culture",
-    description: "Building effective teams in a distributed world",
+    title: "UX UI Design",
+    description: "Create stunning animations",
     category: "Discussion",
     isLive: false,
   },
   {
     rank: 3,
-    title: "Climate Tech Innovation",
-    description: "Startups leading the green revolution",
+    title: "Full Stack Development",
+    description: "Create stunning animations",
     category: "Discussion",
     isLive: true,
   },
   {
     rank: 4,
-    title: "Mental Wellness Tips",
-    description: "Daily practices for a healthier mind",
-    category: "Wellness",
+    title: "Motion Graphics",
+    description: "Create stunning animations",
+    category: "Discussion",
     isLive: false,
   },
 ];
 
-const InTheAirSection = () => {
+export default function InTheAirSection() {
   return (
-    <section className="py-20 relative">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-          In the <span className="gradient-orange-text">Air</span>
-        </h2>
+    <section className="py-12 sm:py-20 bg-navy overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative">
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {inTheAirItems.map((item) => (
-            <div
-              key={item.rank}
-              className="relative p-[2px] rounded-[2rem] group cursor-pointer overflow-hidden"
-            >
-              <div className="absolute inset-0 gradient-orange opacity-30 group-hover:opacity-60 transition-opacity" />
-              <div className="relative bg-card rounded-[2rem] p-6 flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full gradient-orange flex items-center justify-center text-primary-foreground font-bold text-xl">
-                  {item.rank}
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="outline" className="border-primary/50 text-primary text-xs">
+        {/* HEADER */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-14 gap-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+            In the <span className="text-orange">Air</span>
+          </h2>
+
+          <button className="btn-primary self-start hidden sm:inline-flex">
+            View all
+          </button>
+        </div>
+
+        {/* SLIDER */}
+        <Carousel opts={{ align: "start", loop: true }}>
+          <CarouselContent className="gap-6 sm:gap-8">
+            {inTheAirItems.map((item, i) => (
+              <CarouselItem
+                key={i}
+                className="basis-1/2 sm:basis-1/3 lg:basis-1/4 flex justify-center"
+              >
+                {/* OVAL CARD */}
+                <div className="relative w-full max-w-[240px] sm:max-w-[260px] aspect-[2/3] rounded-[120px] sm:rounded-[140px] border border-orange/70 flex items-center justify-center card card-hover">
+
+                  {/* INNER */}
+                  <div className="w-[90%] aspect-[2/3] rounded-[100px] sm:rounded-[120px] bg-gradient-to-b from-[#4A2E24] via-[#5A3A2E] to-[#3A241C] flex flex-col items-center text-center px-4 sm:px-6">
+
+                    {/* NUMBER */}
+                    <div className="mt-4 sm:mt-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-pink-500/80 text-white flex items-center justify-center text-lg sm:text-xl font-semibold shadow-lg">
+                      {item.rank}
+                    </div>
+
+                    {/* CATEGORY */}
+                    <span className="mt-3 sm:mt-4 px-3 py-1 rounded-full bg-orange/20 text-orange-300 text-xs sm:text-sm">
                       {item.category}
-                    </Badge>
+                    </span>
+
+                    {/* TITLE */}
+                    <h3 className="mt-4 sm:mt-6 text-foreground text-base sm:text-lg font-semibold">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-2 text-muted-foreground text-xs sm:text-sm">
+                      {item.description}
+                    </p>
+
+                    {/* LIVE */}
                     {item.isLive && (
-                      <Badge className="bg-red-500 text-white border-none text-xs animate-pulse">
+                      <span className="mt-auto mb-4 sm:mb-6 px-3 py-1 rounded-full bg-orange text-black text-xs sm:text-sm font-medium">
                         LIVE
-                      </Badge>
+                      </span>
                     )}
                   </div>
-                  
-                  <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground text-sm">{item.description}</p>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          {/* ARROWS */}
+          <CarouselPrevious className="-left-6 sm:-left-10 bg-orange text-black hover:opacity-90" />
+          <CarouselNext className="-right-6 sm:-right-10 bg-orange text-black hover:opacity-90" />
+        </Carousel>
       </div>
     </section>
   );
-};
-
-export default InTheAirSection;
+}
