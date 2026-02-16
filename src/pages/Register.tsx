@@ -113,7 +113,7 @@ export default function Register() {
         subscriptionPlan: selectedPlan,
         role: selectedPlan,
       });
-      navigate('/dashboard');
+      navigate('/homepage');
     } catch (err) {
       console.error('Registration error:', err);
     } finally {

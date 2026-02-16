@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Homepage from "./pages/Homepage";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +31,14 @@ const App = () => (
             <Route path="/register" element={<Register />} />
 
             {/* PROTECTED ROUTES */}
+            <Route
+              path="/homepage"
+              element={
+                <ProtectedRoute>
+                  <Homepage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/dashboard"
               element={

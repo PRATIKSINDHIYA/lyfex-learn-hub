@@ -59,7 +59,7 @@ const Header = () => {
           {user && userProfile ? (
             <>
               {/* Dashboard Link */}
-              <Link to="/dashboard">
+              <Link to="/homepage">
                 <Button className="gradient-orange text-primary-foreground hover:opacity-90 rounded-full px-6 flex items-center gap-2">
                   <LayoutDashboard size={16} />
                   Dashboard
@@ -95,7 +95,7 @@ const Header = () => {
                       My Profile
                     </Link>
                     <Link
-                      to="/dashboard"
+                      to="/homepage"
                       onClick={() => setIsProfileOpen(false)}
                       className="flex items-center gap-2 px-4 py-2 text-white/80 hover:text-white hover:bg-white/5 transition-colors text-sm"
                     >
@@ -175,7 +175,7 @@ const Header = () => {
                       My Profile
                     </Button>
                   </Link>
-                  <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                  <Link to="/homepage" onClick={() => setIsMenuOpen(false)}>
                     <Button className="gradient-orange text-primary-foreground hover:opacity-90 w-full flex items-center justify-center gap-2">
                       <LayoutDashboard size={16} />
                       Dashboard
