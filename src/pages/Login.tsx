@@ -35,7 +35,7 @@ export default function Login() {
     try {
       setLoading(true);
       await loginWithEmail(formData.email, formData.password);
-      navigate('/dashboard');
+      navigate('/homepage');
     } catch (err) {
       console.error('Login error:', err);
     } finally {
@@ -50,7 +50,7 @@ export default function Login() {
     try {
       setLoading(true);
       await loginWithGoogle();
-      navigate('/dashboard');
+      navigate('/homepage');
     } catch (err) {
       console.error('Google login error:', err);
     } finally {

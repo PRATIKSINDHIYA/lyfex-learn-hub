@@ -1,4 +1,6 @@
-import { Eye } from "lucide-react";
+import { useState } from "react";
+import { Eye, Plus } from "lucide-react";
+import CreatePauseContentModal from "./CreatePauseContentModal";
 import {
   Carousel,
   CarouselContent,
@@ -34,8 +36,11 @@ const pauseItems = [
   },
 ];
 
-export default function PauseSection() {
+export default function PauseSection({ userRole }: { userRole?: string }) {
+  const [showCreate, setShowCreate] = useState(false);
   return (
+    <>
+    <CreatePauseContentModal open={showCreate} onClose={() => setShowCreate(false)} />
     <section className="py-24 bg-[#070B24] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative">
 
@@ -51,9 +56,16 @@ export default function PauseSection() {
             </p>
           </div>
 
-          <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
-            View all
-          </button>
+          <div className="flex items-center gap-3">
+            {userRole === 'CREATE' && (
+              <button onClick={() => setShowCreate(true)} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
+                <Plus size={18} /> Create Pause Content
+              </button>
+            )}
+            <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
+              View all
+            </button>
+          </div>
         </div>
 
         {/* SLIDER */}
@@ -98,5 +110,6 @@ export default function PauseSection() {
         </Carousel>
       </div>
     </section>
+    </>
   );
 }
