@@ -1,38 +1,74 @@
 import { Heart } from "lucide-react";
 
+const items = [
+  "FAQ",
+  "Help & Support",
+  "Contacts",
+  "Privacy",
+  "Terms & Conditions",
+];
+
+const Triangle = ({
+  text,
+  down = false,
+}: {
+  text: string;
+  down?: boolean;
+}) => {
+  return (
+    <div className="relative w-[13rem] h-[10rem] flex items-center justify-center">
+      <svg
+        viewBox="0 0 200 180"
+        className={`absolute inset-0 ${down ? "rotate-180" : ""}`}
+      >
+        <defs>
+          <filter id="orangeBlur" x="-50%" y="-50%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="22" />
+          </filter>
+        </defs>
+
+        {/* DARK ORANGE BLUR GLOW */}
+        <polygon
+          points="100,15 20,165 180,165"
+          fill="#d9772a"
+          opacity="10"
+          filter="url(#orangeBlur)"
+        />
+
+        {/* MAIN TRIANGLE */}
+        <polygon
+          // points="100,40 150,160 50,160"
+          fill="#ff9f43"
+          opacity="0.7"
+        />
+      </svg>
+
+      {/* TEXT */}
+      <span className="relative z-10 px-6 py-2 rounded-full bg-[#da934c] text-white text-sm font-medium shadow-md">
+        {text}
+      </span>
+    </div>
+  );
+};
+
 const Footer = () => {
   return (
-    <footer className="py-12 border-t border-border/50">
+    <footer className="py-16 bg-[#070c2b]">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg gradient-orange flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">L</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">Lyfex</span>
+        <div className="flex flex-col items-center gap-12">
+
+          {/* TRIANGLES (GAP REDUCED) */}
+          <div className="flex flex-wrap justify-center gap-10">
+            {items.map((item, i) => (
+              <Triangle
+                key={i}
+                text={item}
+                down={i % 2 === 1}
+              />
+            ))}
           </div>
 
-          {/* Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-6 text-sm">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              About
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Privacy
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Terms
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Contact
-            </a>
-          </nav>
 
-          {/* Copyright */}
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            Made with <Heart size={14} className="text-primary fill-primary" /> by Lyfex Team
-          </div>
         </div>
       </div>
     </footer>

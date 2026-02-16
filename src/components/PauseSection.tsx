@@ -1,42 +1,53 @@
-import { Badge } from "@/components/ui/badge";
 import { Eye } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const pauseItems = [
   {
     title: "Meditation for Focus",
     views: 5600,
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format",
   },
   {
     title: "Nature Sounds",
     views: 8200,
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format",
   },
   {
     title: "Breathing Exercises",
     views: 4300,
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format",
   },
   {
     title: "Calming Music",
     views: 9100,
-    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&auto=format",
   },
 ];
 
-const PauseSection = () => {
+export default function PauseSection() {
   return (
-    <section className="py-20 relative">
-      <div className="container mx-auto px-4">
-         <div className="flex items-start justify-between mb-16">
+    <section className="py-24 bg-[#070B24] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative">
+
+        {/* HEADER */}
+        <div className="flex items-start justify-between mb-16">
           <div>
-            <span className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#2A1E14] border border-orange-400/30 text-orange-400 font-semibold">
-              📍 SUPPORT 🤝
+            <span className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#2A1E14] border border-orange-400/30 text-orange-400 font-semibold">
+              📍 PAUSE 🧘
             </span>
 
-            <p className="text-white/80 mt-6 text-xl">
-              Get Help, Give Help
+            <p className="text-white/70 mt-6 text-lg">
+              Refresh, relax & reset your mind
             </p>
           </div>
 
@@ -44,30 +55,36 @@ const PauseSection = () => {
             View all
           </button>
         </div>
-        
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-          Refresh, Relax, and <span className="gradient-orange-text">Reset</span>
-        </h2>
-        <p className="text-muted-foreground mb-8">Take a moment for yourself</p>
 
-        <Carousel opts={{ align: "start", loop: true }} className="w-full">
-          <CarouselContent className="-ml-4">
+        {/* SLIDER */}
+        <Carousel opts={{ align: "start", loop: true }}>
+          <CarouselContent>
             {pauseItems.map((item, index) => (
-              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <div className="relative rounded-2xl overflow-hidden group cursor-pointer h-64">
+              <CarouselItem
+                key={index}
+                className="lg:basis-1/3 md:basis-1/2 px-6"
+              >
+                {/* CARD */}
+                <div className="relative h-[260px] rounded-[28px] overflow-hidden group cursor-pointer">
+
+                  {/* IMAGE */}
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="flex items-center gap-1 text-sm text-foreground/80 mb-2">
+
+                  {/* GRADIENT OVERLAY */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  {/* CONTENT */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <div className="flex items-center gap-2 text-sm text-white/80 mb-2">
                       <Eye size={14} />
                       <span>{(item.views / 1000).toFixed(1)}k views</span>
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+
+                    <h3 className="text-xl font-semibold text-white leading-snug">
                       {item.title}
                     </h3>
                   </div>
@@ -75,12 +92,11 @@ const PauseSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-4 bg-primary text-primary-foreground hover:bg-primary/90" />
-          <CarouselNext className="hidden md:flex -right-4 bg-primary text-primary-foreground hover:bg-primary/90" />
+
+          <CarouselPrevious className="-left-8 bg-orange-500 text-black hover:bg-orange-400" />
+          <CarouselNext className="-right-8 bg-orange-500 text-black hover:bg-orange-400" />
         </Carousel>
       </div>
     </section>
   );
-};
-
-export default PauseSection;
+}

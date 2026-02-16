@@ -29,33 +29,47 @@ const discussItems = [
     date: "Today",
     time: "6 PM",
   },
+  {
+    title: "Why Communication Skills Matter More Than Technical Skills",
+    speaker: "Sarah Chen",
+    category: "Robotics",
+    date: "Today",
+    time: "6 PM",
+  },
+  {
+    title: "Why Communication Skills Matter More Than Technical Skills",
+    speaker: "Sarah Chen",
+    category: "Robotics",
+    date: "Today",
+    time: "6 PM",
+  },
 ];
 
 export default function DiscussSection() {
   return (
-    <section className="py-12 sm:py-20 bg-navy overflow-hidden">
+    <section className="py-24 bg-[#070B24] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative">
 
         {/* HEADER */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-16 gap-6">
+        <div className="flex items-start justify-between mb-16">
           <div>
-            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#2A1E14] border border-orange/30 text-orange font-semibold text-sm">
-              📍 DISCUSS 💬
+            <span className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#2A1E14] border border-orange-400/30 text-orange-400 font-semibold">
+              📍 DISCUSS 🤓
             </span>
 
-            <p className="text-foreground/80 mt-4 text-lg">
+            <p className="text-white/70 mt-6 text-lg">
               Talk, ask & share freely
             </p>
           </div>
 
-          <button className="btn-primary self-start hidden sm:inline-flex">
+          <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
             View all
           </button>
         </div>
 
         {/* SLIDER */}
         <Carousel opts={{ align: "start", loop: true }}>
-          <CarouselContent className="gap-6 sm:gap-8">
+          <CarouselContent className="">
             {discussItems.map((item, i) => (
               <CarouselItem
                 key={i}

@@ -1,4 +1,5 @@
 import { Users } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Carousel,
   CarouselContent,
@@ -42,16 +43,46 @@ const liveRooms = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, rotateX: 15 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.6,
+      delay: i * 0.1,
+    },
+  }),
+};
+
 export default function LiveNow() {
   return (
-    <section className="py-20 bg-[#070B24]">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-[#070B24] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative">
 
-        {/* HEADER */}
-        <div className="flex items-center justify-between mb-12">
+        {/* HEADER
+        <div className="flex items-start justify-between mb-16">
+          <div>
+            <span className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#2A1410] border border-orange-400/30 text-orange-400 font-semibold">
+              🔴 LIVE NOW 
+            </span>
+
+            <p className="text-white/70 mt-6 text-lg">
+              People talking. Ideas flowing. No scripts.
+            </p>
+          </div>
+
+          <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
+            View all
+          </button>
+        </div> */}
+
+
+         <div className="flex items-center justify-between mb-12">
           <div>
             <h2 className="text-4xl font-bold text-white">
-              Live <span className="text-orange-400">Now</span>
+             🔴 Live <span className="text-orange-400">Now</span>
             </h2>
             <p className="text-white/60 mt-2">
               People talking. Ideas flowing. No scripts.
@@ -63,54 +94,81 @@ export default function LiveNow() {
           </button>
         </div>
 
-        {/* SLIDER */}
+        {/* CAROUSEL */}
         <Carousel opts={{ align: "start", loop: true }}>
-          <CarouselContent>
+          <CarouselContent className="">
             {liveRooms.map((room, i) => (
-              <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3 px-4">
-                <div
-                  className={`h-[140px] rounded-full px-[2px]
-                  bg-gradient-to-r ${room.gradient}
-                  flex items-center justify-between shadow-xl`}
-                >
-                  {/* LEFT */}
-                  <div className="flex items-center gap-6">
-                    {/* LIVE */}
-                    <span className="flex items-center gap-1 text-sm bg-black/30 px-4 py-1 rounded-full text-white">
-                      <span className="w-2 h-2 bg-yellow-300 rounded-full" />
-                      LIVE
-                    </span>
+              <CarouselItem key={i} className="basis-full sm:basis-1/2 lg:basis-1/3 flex justify-center">
+                <div className="w-full max-w-[360px] flex justify-center">
+                  <motion.div
+                    custom={i}
+                    variants={cardVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="w-full"
+                  >
+                    <div
+                      className={`h-20 sm:h-24 rounded-full px-3 sm:px-5
+                      bg-gradient-to-r ${room.gradient}
+                      flex items-center justify-between
+                      shadow-lg hover:shadow-2xl
+                      transition-all duration-300
+                      transform hover:scale-105
+                      cursor-pointer gap-2`}
+                    style={{
+                      perspective: "1000px",
+                      transformStyle: "preserve-3d",
+                    }}
+                  >
+                    {/* LEFT */}
+                    <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                      {/* LIVE */}
+                      <motion.span
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="flex items-center gap-1 text-xs bg-black/30 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-white font-medium whitespace-nowrap text-[11px] sm:text-xs"
+                      >
+                        <motion.span
+                          animate={{ opacity: [1, 0.5, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-yellow-300 rounded-full"
+                        />
+                        LIVE
+                      </motion.span>
 
-                    {/* TITLE */}
-                    <div>
-                      <h3 className="text-white text-xl font-semibold leading-tight">
-                        {room.title}
-                        <br />
-                        {room.subtitle}
-                      </h3>
-                      <p className="text-blue-200 text-sm mt-1">
-                        with {room.host}
-                      </p>
+                      {/* TITLE & SUBTITLE */}
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-white text-sm sm:text-2xl font-bold leading-tight truncate">
+                          {room.title}
+                        </h3>
+                        <p className="text-white/80 text-xs leading-tight truncate">
+                          {room.subtitle}
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* RIGHT */}
-                  <div className="flex items-center gap-4">
-                    <span className="flex items-center gap-2 bg-[#6B4A2D] text-white px-4 py-2 rounded-full text-sm">
-                      <Users size={16} /> {room.users}
-                    </span>
+                    {/* RIGHT */}
+                    <div className="flex items-center gap-1.5 sm:gap-2 ml-1 flex-shrink-0">
+                      <span className="flex items-center gap-0.5 sm:gap-1 bg-[#6B4A2D] text-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                        <Users size={10} className="sm:w-3 sm:h-3" />
+                        <span className="hidden sm:inline">{room.users}</span>
+                        <span className="sm:hidden text-[10px]">{room.users}</span>
+                      </span>
 
-                    <span className="bg-orange-400/90 text-white px-6 py-2 rounded-full text-sm font-medium">
-                      {room.mode}
-                    </span>
-                  </div>
+                      <span className="bg-orange-400/90 text-white px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                        {room.mode}
+                      </span>
+                    </div>
+                    </div>
+                  </motion.div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="-left-6 bg-orange-500 text-black" />
-          <CarouselNext className="-right-6 bg-orange-500 text-black" />
+          <CarouselPrevious className="-left-6 sm:-left-10 bg-orange-500 text-black hover:opacity-90 border-0" />
+          <CarouselNext className="-right-6 sm:-right-10 bg-orange-500 text-black hover:opacity-90 border-0" />
         </Carousel>
       </div>
     </section>

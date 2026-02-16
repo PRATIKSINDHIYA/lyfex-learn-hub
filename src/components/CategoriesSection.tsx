@@ -22,13 +22,13 @@ const CategoriesSection = () => {
   ];
 
   return (
-    <section className="py-16">
-      <div className="container">
+    <section className="py-24 bg-background">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
 
          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 sm:mb-16 gap-6">
           <div>
-            <span className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#2A1E14] border border-orange/30 text-orange font-semibold text-sm">
+            <span className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#2A1E14] border border-orange-400/30 text-orange-400 font-semibold">
               📍 Categories
             </span>
 
@@ -37,7 +37,7 @@ const CategoriesSection = () => {
             </p>
           </div>
 
-          <button className="btn-primary self-start hidden sm:inline-flex">
+          <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
             View all
           </button>
         </div>
