@@ -26,6 +26,7 @@ import InTheAirSection from '@/components/InTheAirSection';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import OnlineSpaceSection from '@/components/OnlineSpaceSection';
+import EarningsSection from '@/components/EarningsSection';
 
 
 export default function Dashboard() {
@@ -155,77 +156,32 @@ export default function Dashboard() {
 
       {/* MAIN CONTENT - Same as Home Page but with Access Control */}
       <div className="pt-20">
-        {/* LIVE NOW SECTION - Available to all */}
-        <LiveNow />
+        {/* LIVE NOW SECTION - Available to all, Create button role-based */}
+        <LiveNow userRole={userProfile.role} />
 
         {/* MOOD SPINNER - All users */}
         <MoodSpinner />
 
-        {/* DISCUSS SECTION - Only for TALK and CREATE */}
+        {/* DISCUSS SECTION - role-based create */}
+        <DiscussSection userRole={userProfile.role} />
 
-        {/* {canAccessTalkFeatures ? (
-          <DiscussSection />
-        ) : (
-          <div className="container mx-auto px-4 py-16">
-            <Card className="backdrop-blur-xl bg-gradient-to-br from-slate-900/50 to-slate-900/20 border-white/10 p-12 text-center">
-              <div className="flex justify-center mb-4">
-                <div className="bg-orange-500/20 p-4 rounded-full">
-                  <Lock className="w-8 h-8 text-orange-400" />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Discuss Rooms - Premium Feature</h3>
-              <p className="text-white/60 mb-6">Upgrade to Talk or Creator to participate in discussions</p>
-              <Button 
-                onClick={handleUpgradeClick}
-                className="gradient-orange text-primary-foreground rounded-full px-8"
-              >
-                <Zap size={16} className="mr-2" />
-                Upgrade Now (Talk or Creator)
-              </Button>
-            </Card>
-          </div>
-        )} */}
-
-
-        <DiscussSection />
-             
-
-        {/* LEARN SECTION - All users but with role-based content */}
+        {/* LEARN SECTION - All users */}
         <LearnSection />
 
         {/* WATCH SECTION - All users */}
         <WatchSection />
 
-        {/* SUPPORT SECTION - All users */}
-        <SupportSection />
+        {/* SUPPORT SECTION - role-based create */}
+        <SupportSection userRole={userProfile.role} />
 
-        {/* PAUSE (Women Community) - Only for TALK and CREATE */}
-        {canAccessTalkFeatures ? (
-          <PauseSection />
-        ) : (
-          <div className="container mx-auto px-4 py-16">
-            <Card className="backdrop-blur-xl bg-gradient-to-br from-purple-900/50 to-pink-900/20 border-purple-500/20 p-12 text-center">
-              <div className="flex justify-center mb-4">
-                <div className="bg-purple-500/20 p-4 rounded-full">
-                  <Lock className="w-8 h-8 text-purple-400" />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Pause - Women Community</h3>
-              <p className="text-white/60 mb-6">Join our safe space for women - Upgrade to Talk or Creator</p>
-              <Button 
-                onClick={handleUpgradeClick}
-                className="gradient-orange text-primary-foreground rounded-full px-8"
-              >
-                <Zap size={16} className="mr-2" />
-                Upgrade Now (Talk or Creator)
-              </Button>
-            </Card>
-          </div>
-        )}
+        {/* PAUSE - role-based create */}
+        <PauseSection userRole={userProfile.role} />
+
+        {/* EARNINGS - Only for CREATE */}
+        {canAccessCreateFeatures && <EarningsSection />}
 
         {/* IN THE AIR - All users */}
         <InTheAirSection />
-
 
         <OnlineSpaceSection />
         

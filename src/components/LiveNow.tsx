@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Users, Plus } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import CreateLiveSessionModal from "./CreateLiveSessionModal";
 import {
   Carousel,
@@ -60,6 +61,16 @@ const cardVariants = {
 
 export default function LiveNow({ userRole }: { userRole?: string }) {
   const [showCreate, setShowCreate] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCreate = () => {
+    if (userRole === 'CREATE') {
+      setShowCreate(true);
+    } else {
+      navigate('/subscription');
+    }
+  };
+
   return (
     <>
     <CreateLiveSessionModal open={showCreate} onClose={() => setShowCreate(false)} />
@@ -95,9 +106,9 @@ export default function LiveNow({ userRole }: { userRole?: string }) {
           </div>
 
           <div className="flex items-center gap-3">
-            {userRole === 'CREATE' && (
-              <button onClick={() => setShowCreate(true)} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
-                <Plus size={18} /> Create Live Session
+            {userRole && (
+              <button onClick={handleCreate} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
+                <Plus size={18} /> {userRole === 'CREATE' ? 'Create Live Session' : '🔒 Create (Upgrade)'}
               </button>
             )}
             <button className="px-6 py-2 rounded-full bg-orange-500 text-black font-semibold">

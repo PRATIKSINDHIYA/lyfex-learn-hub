@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Palette, FileText, Globe, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import CreateSupportWorkModal from "./CreateSupportWorkModal";
 import {
   Carousel,
@@ -42,6 +43,16 @@ const supportItems = [
 
 export default function SupportSection({ userRole }: { userRole?: string }) {
   const [showCreate, setShowCreate] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCreate = () => {
+    if (userRole === 'CREATE') {
+      setShowCreate(true);
+    } else {
+      navigate('/subscription');
+    }
+  };
+
   return (
     <>
     <CreateSupportWorkModal open={showCreate} onClose={() => setShowCreate(false)} />
@@ -61,9 +72,9 @@ export default function SupportSection({ userRole }: { userRole?: string }) {
           </div>
 
           <div className="flex items-center gap-3">
-            {userRole === 'CREATE' && (
-              <button onClick={() => setShowCreate(true)} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
-                <Plus size={18} /> Publish Work
+            {userRole && (
+              <button onClick={handleCreate} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
+                <Plus size={18} /> {userRole === 'CREATE' ? 'Publish Work' : '🔒 Publish (Upgrade)'}
               </button>
             )}
             <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
