@@ -54,7 +54,7 @@ export default function DiscussSection({ userRole }: { userRole?: string }) {
 
   const handleCreate = () => {
     if (userRole === 'CREATE') {
-      setShowCreate(true);
+      navigate('/discuss');
     } else {
       navigate('/subscription');
     }

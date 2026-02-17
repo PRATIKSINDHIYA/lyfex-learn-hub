@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AvatarRow from "./AvatarRow";
 
 const textReveal = {
@@ -17,6 +18,7 @@ const textReveal = {
 };
 
 const HeroBanner = () => {
+  const navigate = useNavigate();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
@@ -146,7 +148,7 @@ const HeroBanner = () => {
             animate="visible"
             className="flex flex-col sm:flex-row gap-4 pointer-events-auto"
           >
-            <button className="hero-btn-primary">
+            <button onClick={() => navigate("/discuss")} className="hero-btn-primary">
               Join Group Discussion
             </button>
           </motion.div>
