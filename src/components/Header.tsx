@@ -42,16 +42,24 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Explore
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Live
-          </a>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Community
-          </a>
+        <nav className="hidden md:flex items-center gap-5">
+          {user ? (
+            <>
+              <Link to="/live-sessions" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Live</Link>
+              <Link to="/discuss" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Discuss</Link>
+              <Link to="/support" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Support</Link>
+              <Link to="/pause" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Pause</Link>
+              {userProfile?.role === 'CREATE' && (
+                <Link to="/earnings" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Earnings</Link>
+              )}
+            </>
+          ) : (
+            <>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Explore</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Live</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Community</a>
+            </>
+          )}
         </nav>
 
         {/* Auth Section */}
@@ -142,15 +150,23 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-background border-t border-border/50 py-4 px-4 animate-fade-in">
           <nav className="flex flex-col gap-4 mb-4">
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Explore
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Live
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Community
-            </a>
+            {user ? (
+              <>
+                <Link to="/live-sessions" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Live</Link>
+                <Link to="/discuss" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Discuss</Link>
+                <Link to="/support" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Support</Link>
+                <Link to="/pause" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Pause</Link>
+                {userProfile?.role === 'CREATE' && (
+                  <Link to="/earnings" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Earnings</Link>
+                )}
+              </>
+            ) : (
+              <>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Explore</a>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Live</a>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Community</a>
+              </>
+            )}
           </nav>
 
           <div className="border-t border-white/10 pt-4">

@@ -65,7 +65,7 @@ export default function LiveNow({ userRole }: { userRole?: string }) {
 
   const handleCreate = () => {
     if (userRole === 'CREATE') {
-      setShowCreate(true);
+      navigate('/live-sessions');
     } else {
       navigate('/subscription');
     }

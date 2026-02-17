@@ -43,7 +43,7 @@ export default function PauseSection({ userRole }: { userRole?: string }) {
 
   const handleCreate = () => {
     if (userRole === 'CREATE') {
-      setShowCreate(true);
+      navigate('/pause');
     } else {
       navigate('/subscription');
     }

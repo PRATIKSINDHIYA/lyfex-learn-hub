@@ -47,7 +47,7 @@ export default function SupportSection({ userRole }: { userRole?: string }) {
 
   const handleCreate = () => {
     if (userRole === 'CREATE') {
-      setShowCreate(true);
+      navigate('/support');
     } else {
       navigate('/subscription');
     }
