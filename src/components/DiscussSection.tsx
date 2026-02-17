@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Calendar, Clock, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import CreateDiscussionModal from "./CreateDiscussionModal";
 import {
   Carousel,
@@ -49,6 +50,16 @@ const discussItems = [
 
 export default function DiscussSection({ userRole }: { userRole?: string }) {
   const [showCreate, setShowCreate] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCreate = () => {
+    if (userRole === 'CREATE') {
+      setShowCreate(true);
+    } else {
+      navigate('/subscription');
+    }
+  };
+
   return (
     <>
     <CreateDiscussionModal open={showCreate} onClose={() => setShowCreate(false)} />
@@ -68,9 +79,9 @@ export default function DiscussSection({ userRole }: { userRole?: string }) {
           </div>
 
           <div className="flex items-center gap-3">
-            {userRole === 'CREATE' && (
-              <button onClick={() => setShowCreate(true)} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
-                <Plus size={18} /> Create Discussion
+            {userRole && (
+              <button onClick={handleCreate} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
+                <Plus size={18} /> {userRole === 'CREATE' ? 'Create Discussion' : '🔒 Create (Upgrade)'}
               </button>
             )}
             <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
