@@ -111,7 +111,7 @@ export default function LiveNow({ userRole }: { userRole?: string }) {
                 <Plus size={18} /> {userRole === 'CREATE' ? 'Create Live Session' : '🔒 Create (Upgrade)'}
               </button>
             )}
-            <button className="px-6 py-2 rounded-full bg-orange-500 text-black font-semibold">
+            <button onClick={() => navigate('/live-sessions')} className="px-6 py-2 rounded-full bg-orange-500 text-black font-semibold hover:bg-orange-400 transition">
               View all
             </button>
           </div>
