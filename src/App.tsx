@@ -19,6 +19,7 @@ import DiscussPage from "./pages/DiscussPage";
 import SupportPage from "./pages/SupportPage";
 import PausePage from "./pages/PausePage";
 import EarningsPage from "./pages/EarningsPage";
+import LearnPage from "./pages/LearnPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/support" element={<ProtectedRoute><SupportPage /></ProtectedRoute>} />
             <Route path="/pause" element={<ProtectedRoute><PausePage /></ProtectedRoute>} />
             <Route path="/earnings" element={<ProtectedRoute><EarningsPage /></ProtectedRoute>} />
+            <Route path="/learn" element={<ProtectedRoute><LearnPage /></ProtectedRoute>} />
 
             {/* 404 PAGE */}
             <Route path="*" element={<NotFound />} />

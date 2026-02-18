@@ -73,7 +73,7 @@ export default function PauseSection({ userRole }: { userRole?: string }) {
                 <Plus size={18} /> {userRole === 'CREATE' ? 'Create Pause Content' : '🔒 Create (Upgrade)'}
               </button>
             )}
-            <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
+            <button onClick={() => navigate('/pause')} className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
               View all
             </button>
           </div>

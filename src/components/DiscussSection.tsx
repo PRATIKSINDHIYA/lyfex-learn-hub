@@ -84,7 +84,7 @@ export default function DiscussSection({ userRole }: { userRole?: string }) {
                 <Plus size={18} /> {userRole === 'CREATE' ? 'Create Discussion' : '🔒 Create (Upgrade)'}
               </button>
             )}
-            <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
+            <button onClick={() => navigate('/discuss')} className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
               View all
             </button>
           </div>
